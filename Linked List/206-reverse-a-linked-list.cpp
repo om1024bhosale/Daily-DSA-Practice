@@ -66,6 +66,8 @@ public:
     }
 };
 */
+/*
+ Second Approach:
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
@@ -82,3 +84,24 @@ public:
         return head;
     }
 };
+*/
+
+
+//Third Approach:
+class Solution {
+public:
+
+    ListNode* reverse(ListNode* curr,ListNode* prev)
+    {
+        if(curr==NULL) return prev;
+
+        ListNode* fut = curr->next;
+        curr->next=prev;
+        return reverse(fut,curr);
+
+    }
+    ListNode* reverseList(ListNode* head) {
+        return reverse(head,NULL);
+    }
+};
+
