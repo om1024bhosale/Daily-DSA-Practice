@@ -39,6 +39,10 @@ Follow up: A linked list can be reversed either iteratively or recursively. Coul
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+/*
+ First Solution:
+
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
@@ -59,5 +63,22 @@ public:
         }
         return head;
 
+    }
+};
+*/
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* curr=head,*prev=NULL,*fut=NULL;
+        while(curr!=NULL)
+        {
+            fut=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=fut;
+        }
+        
+        head=prev;
+        return head;
     }
 };
