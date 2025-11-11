@@ -33,43 +33,31 @@ nums is a non-decreasing array.
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-       vector<int>ans(2); 
-       int start=0,end=nums.size()-1,first=-1,last=-1,mid;
-       while(start<=end)
-       {
-           mid=start+(end-start)/2;
-           if(nums[mid]==target)
-           {
-               first=mid;
-               end=mid-1;
-           }
-           else if(nums[mid]>target)
-           {
-               end=mid-1;
-           }
-           else{
-               start=mid+1;
-           }
+        if (nums.size() == 1 && nums[0] == target)
+            return {0, 0};
+        int s = 0, e = nums.size() - 1, mid = 0;
+        int first = -1, last = -1;
+        while (s <= e) {
+            mid = s + (e - s) / 2;
+            if (nums[mid] == target) {
+                first = mid;
+                e = mid - 1;
+            } else if (nums[mid] < target)
+                s = mid + 1;
+            else
+                e = mid - 1;
         }
-        start=0,end=nums.size()-1;
-        while(start<=end)
-       {
-           mid=start+(end-start)/2;
-           if(nums[mid]==target)
-           {
-               last=mid;
-               start=mid+1;
-           }
-           else if(nums[mid]>target)
-           {
-               end=mid-1;
-           }
-           else{
-               start=mid+1;
-           }
+        s = 0, e = nums.size() - 1, mid = 0;
+        while (s <= e) {
+            mid = s + (e - s) / 2;
+            if (nums[mid] == target) {
+                last = mid;
+                s = mid + 1;
+            } else if (nums[mid] < target)
+                s = mid + 1;
+            else
+                e = mid - 1;
         }
-        ans[0]=first;
-        ans[1]=last;
-        return ans;
+        return {first, last};
     }
 };
